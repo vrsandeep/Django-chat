@@ -17,7 +17,6 @@ class ChatSerializer(serializers.ModelSerializer):
     Sending Chat data to end user
     """
     user = serializers.SlugRelatedField(queryset=User.objects.all(), slug_field='username')
-    created = serializers.DateTimeField()
 
     class Meta:
         model = Chat
