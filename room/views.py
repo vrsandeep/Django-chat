@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.http import Http404
 from django.shortcuts import render
 from django.contrib.auth.models import User
@@ -57,6 +58,8 @@ def chat_room(request, room):
     The template for this view has the WebSocket business to send and stream
     messages, so see the template for where the magic happens.
     """
+    if not settings.DEBUG:
+        raise Http404()
     messages = Chat.objects.filter(room=room).order_by('-created')[:50]
 
     return render(request, "room.html", {
