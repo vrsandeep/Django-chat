@@ -74,3 +74,4 @@ celerybeat-schedule
 # virtualenv
 venv/
 ENV/
+db.sqlite3
