@@ -4,7 +4,6 @@ from .models import Chat
 
 class ChatAdmin(admin.ModelAdmin):
     list_display = ('user', 'room', 'content')
-    filter_fields = ('room')
-
+    list_filter = ('room',)
 
 admin.site.register(Chat, ChatAdmin)

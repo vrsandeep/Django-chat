@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # Installed Apps
     'rest_framework',
+    'channels',
 
     # Django Apps
     'accounts',
@@ -128,7 +129,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR + '/static'
-LOGIN_URL = '/'
+LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/accounts/login/'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
@@ -140,4 +141,37 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
+}
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+        },
+        "ROUTING": "django_chat.routing.channel_routing",
+    },
+}
+
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'INFO'
+        },
+        'room': {
+            'handlers': ['console'],
+            'propagate': False,
+            'level': 'DEBUG',
+        },
+    },
 }

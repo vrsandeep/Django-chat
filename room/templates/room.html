@@ -1,0 +1,56 @@
+<!DOCTYPE html>{% load staticfiles %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Django Channels Example{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600,200' rel='stylesheet' type='text/css'>
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static 'normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'skeleton.css' %}">
+  <link rel="stylesheet" href="{% static 'chat.css' %}">
+</head>
+<body>
+  <div class="section">
+    <div class="container">
+        <!-- <h1>{{ room }}</h1> -->
+        <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+          <option {% ifequal room "public" %} selected {% endifequal %} value="{{ request.scheme }}://{{ request.get_host }}/room/render/public/"><h1>Public</h1></option>
+          <option {% ifequal room "room1" %} selected {% endifequal %} value="{{ request.scheme }}://{{ request.get_host }}/room/render/room1/"><h1>Room 1</h1></option>
+          <option {% ifequal room "room2" %} selected {% endifequal %} value="{{ request.scheme }}://{{ request.get_host }}/room/render/room2/"><h1>Room 2</h1></option>
+        </select>
+        <p class="quiet">
+          Anyone with this URL can join the room and chat:
+          <code>{{ request.scheme }}://{{ request.get_host }}/{{ room }}/</code>
+        </p>
+        <p>
+          <label for="handle">{{request.user.username}} </label>
+        </p>
+        <form id="chatform">
+          <table id="chat">
+            <tbody>
+              {% for message in messages %}
+                <tr>
+                  <td>{{ message.created }}</td>
+                  <td>{{ message.user.username }}</td>
+                  <td>{{ message.content }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+              <td>Say something:</td>
+              <td colspan=2>
+                <input id="message" type="text" placeholder="message">
+                <button type="submit" id="go">Say it</button>
+              </td>
+            </tfoot>
+          </table>
+        </form>
+      </div>
+    </div>
+  <script type="text/javascript" src='{% static "jquery-1.12.1.min.js" %}'></script>
+  <script type="text/javascript" src='{% static "reconnecting-websocket.min.js" %}'></script>
+  <script type="text/javascript" src='{% static "chat.js" %}'></script>
+</body>
+</html>

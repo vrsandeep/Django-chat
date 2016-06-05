@@ -1,0 +1,17 @@
+body {
+    padding-top: 4em;
+}
+
+p.deck {
+    font-size: 2.5rem;
+    font-weight: 200;
+}
+
+p.deck a {
+    text-decoration: none;
+}
+
+.quiet {
+    font-size: 90%;
+    color: #999;
+}
