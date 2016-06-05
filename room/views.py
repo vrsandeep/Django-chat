@@ -1,5 +1,7 @@
 from django.http import Http404
+from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -10,14 +12,19 @@ from accounts.serializers import UserSerializer
 
 
 class ChatSerializer(serializers.ModelSerializer):
-
-    user = UserSerializer()
+    """
+    Sending Chat data to end user
+    """
+    user = serializers.SlugRelatedField(queryset=User.objects.all(), slug_field='username')
 
     class Meta:
         model = Chat
 
 
 class ChatAddSerializer(serializers.ModelSerializer):
+    """
+    Used in Channels to validate user data
+    """
     user = serializers.SlugRelatedField(queryset=User.objects.all(), slug_field='username')
 
     class Meta:
@@ -41,10 +48,6 @@ class ChatListView(generics.ListAPIView):
             room=self.kwargs['room']
         ).order_by('-created')[:50]
 
-
-
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
 
 
 @login_required

@@ -13,7 +13,6 @@
 <body>
   <div class="section">
     <div class="container">
-        <!-- <h1>{{ room }}</h1> -->
         <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
           <option {% ifequal room "public" %} selected {% endifequal %} value="{{ request.scheme }}://{{ request.get_host }}/room/render/public/"><h1>Public</h1></option>
           <option {% ifequal room "room1" %} selected {% endifequal %} value="{{ request.scheme }}://{{ request.get_host }}/room/render/room1/"><h1>Room 1</h1></option>

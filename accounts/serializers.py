@@ -3,11 +3,6 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 
 
-def format_name(name):
-    if name:
-        return name.title()
-    return name
-
 def get_username_field():
     username_field = User._meta.get_field(User.USERNAME_FIELD)
     if hasattr(serializers.ModelSerializer, 'serializer_field_mapping'):  # DRF 3.1
@@ -37,7 +32,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         self.fields[User.USERNAME_FIELD] = get_username_field()
 
     def validate_username(self, data):
-        """  Ensure the email id was not registered previously """
+        """  Ensure the username was not registered previously """
 
         if not User.objects.filter(username=data).exists():
             return data
