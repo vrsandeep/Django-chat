@@ -1,3 +1,6 @@
+"""
+    All WebSocket connections require authenticated user
+"""
 import logging
 
 from channels import Group
@@ -13,6 +16,7 @@ log = logging.getLogger(__name__)
 
 @channel_session_user_from_http
 def ws_connect(message):
+
     try:
         path = message['path'].decode('ascii').strip('/').split('/')
         if path[0] != 'chat':
