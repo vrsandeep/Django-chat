@@ -3,7 +3,6 @@ $(function() {
     var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
     var chatsock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/chat" + window.location.pathname);
     chatsock.onmessage = function(message) {
-        console.log(message.data);
         var data = JSON.parse(message.data);
         var chat = $("#chat")
         var ele = $('<tr></tr>')
@@ -22,13 +21,12 @@ $(function() {
     };
 
     $("#chatform").on("submit", function(event) {
-        console.log('Submi');
         var message = {
             user: $('#handle').val(),
             content: $('#message').val(),
             room: 'public'
         }
-        console.log(message);
+        // console.log(message);
         chatsock.send(JSON.stringify(message));
         $("#message").val('').focus();
         return false;
