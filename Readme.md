@@ -31,3 +31,11 @@ python manage.py migrate
 ## Run Server
 
 ```./manage.py runserver```
+
+### API
+Login : POST `/accounts/login/`
+Register: POST `/accounts/register/`
+Load Room Chat: GET `/room/<room_name>` (Requires Auth)
+Realtime updates demo: `/room/render/<room_name>` (Requires Auth)
+
+Allowed `room_name`: `public`, `room1`, `room2`
