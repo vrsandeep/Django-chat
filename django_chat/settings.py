@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     # Installed Apps
     'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
     'channels',
 
     # Django Apps
@@ -70,20 +71,20 @@ WSGI_APPLICATION = 'django_chat.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dev_db',
-        'USER': 'chatuser',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '5432',
-        'ATOMIC_REQUESTS': True,
-        'CONN_MAX_AGE': 3600,  # seconds
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'dev_db',
+    #     'USER': 'chatuser',
+    #     'PASSWORD': 'password',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
+    #     'ATOMIC_REQUESTS': True,
+    #     'CONN_MAX_AGE': 3600,  # seconds
+    # }
 }
 
 
@@ -138,6 +139,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
     'DATETIME_FORMAT': "%b %d, %Y %I:%M %p",
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    )
 }
 
 CHANNEL_LAYERS = {

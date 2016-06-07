@@ -5,6 +5,6 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^(?P<room>[a-zA-Z]+)/$', views.ChatListView.as_view()),
+    url(r'^(?P<room>[a-zA-Z0-9]+)/$', views.ChatListView.as_view()),
     url(r'^render/(?P<room>[\w-]{,50})/$', views.chat_room, name='chat_room')
 ]

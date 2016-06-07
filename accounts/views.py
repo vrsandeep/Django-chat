@@ -1,8 +1,10 @@
 from django.contrib.auth import login as auth_login
 
 from rest_framework import generics, status
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
+from rest_framework.authtoken.models import Token
+
 from .serializers import UserRegisterSerializer, UserLoginSerializer
 
 
@@ -21,7 +23,8 @@ class Register(generics.GenericAPIView):
         auth_login(self.request, self.user)
 
     def get_response(self):
-        return Response(status=status.HTTP_201_CREATED)
+        token = Token.objects.create(user=self.user)
+        return Response({"key": token.key}, status=status.HTTP_201_CREATED)
 
     def get_error_response(self):
         return Response(self.serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -36,6 +39,7 @@ class Register(generics.GenericAPIView):
         return self.get_response()
 
 
+# Create a Verify Token API
 
 class Login(generics.GenericAPIView):
     """
@@ -56,7 +60,8 @@ class Login(generics.GenericAPIView):
         auth_login(self.request, self.user)
 
     def get_response(self):
-        return Response(status=status.HTTP_200_OK)
+        token, _ = Token.objects.get_or_create(user=self.user)
+        return Response({"key": token.key}, status=status.HTTP_200_OK)
 
     def get_error_response(self):
         return Response(self.serializer.errors, status=status.HTTP_400_BAD_REQUEST)
