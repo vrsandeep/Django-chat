@@ -2,7 +2,7 @@ This is a chat server app built using channels in django.
 
 Token Authentication from Django Rest Framework(DRF) is used for all Rest APIs.
 
-Currently only Token authentication is allowed for all socket communications.
+Currently only Token authentication is allowed for all websocket communications.
 
 
 ## Installation
@@ -50,3 +50,4 @@ Allowed `room_name`: `public`, `room1`, `room2`
 https://github.com/andrewgodwin/channels/
 https://blog.heroku.com/archives/2016/3/17/in_deep_with_django_channels_the_future_of_real_time_apps_in_django
 http://www.machinalis.com/blog/jwt-django-channels/
+https://github.com/jacobian/channels-example/
