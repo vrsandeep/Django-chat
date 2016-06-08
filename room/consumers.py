@@ -37,7 +37,7 @@ def ws_connect(message):
     """
     Websocket onconnect channel
     """
-    room = message['path']
+    room = find_room(message['path'])
     if not room:
         return
     log.debug('chat connect room=%s client=%s:%s',
@@ -50,7 +50,7 @@ def ws_receive(message):
     """
     Websocket Receive channel
     """
-    room = message['path']
+    room = find_room(message['path'])
     if not room:
         return
 
@@ -59,7 +59,6 @@ def ws_receive(message):
     import json
     try:
         data = json.loads(message['text'])
-        log.debug(data)
     except ValueError:
         log.debug("ws message isn't json text=%s", text)
         return
