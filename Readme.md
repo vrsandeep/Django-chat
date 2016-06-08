@@ -1,5 +1,9 @@
+This is a chat server app built using channels in django.
 
-This is a chat server app built using channels in django
+Token Authentication from Django Rest Framework(DRF) is used for all Rest APIs.
+
+Currently only Token authentication is allowed for all socket communications.
+
 
 ## Installation
 
