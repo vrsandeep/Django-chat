@@ -37,17 +37,17 @@ python manage.py migrate
 ```./manage.py runserver```
 
 ### API
-Login : POST `/accounts/login/`
-Register: POST `/accounts/register/`
-Load Room Chat: GET `/room/<room_name>` (Requires Auth)
-Realtime updates demo: `/room/render/<room_name>` (Requires Auth)
+ - Login : POST `/accounts/login/`
+ - Register: POST `/accounts/register/`
+ - Load Room Chat: GET `/room/<room_name>` (Requires Auth)
+ - Realtime updates demo: `/room/render/<room_name>` (Requires Auth)
 
-Allowed `room_name`: `public`, `room1`, `room2`
+ - Allowed `room_name`: `public`, `room1`, `room2`
 
 
 ### Resources
 
-https://github.com/andrewgodwin/channels/
-https://blog.heroku.com/archives/2016/3/17/in_deep_with_django_channels_the_future_of_real_time_apps_in_django
-http://www.machinalis.com/blog/jwt-django-channels/
-https://github.com/jacobian/channels-example/
+ - https://github.com/andrewgodwin/channels/
+ - https://blog.heroku.com/archives/2016/3/17/in_deep_with_django_channels_the_future_of_real_time_apps_in_django
+ - http://www.machinalis.com/blog/jwt-django-channels/
+ - https://github.com/jacobian/channels-example/
