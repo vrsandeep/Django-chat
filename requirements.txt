@@ -6,6 +6,7 @@ daphne==0.12.1
 Django==1.9.7
 django-cors-headers==1.1.0
 djangorestframework==3.3.3
+gunicorn
 msgpack-python==0.4.7
 psycopg2==2.6.1
 redis==2.10.5
